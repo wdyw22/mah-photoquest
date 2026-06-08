@@ -1,0 +1,31 @@
+.hero {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    column-gap: 16px;
+}
+
+.accent {
+    color: var(--color-accent);
+    font: var(--font-display);
+    font-size: var(--text-xs);
+    line-height: var(--leading-xxs);
+    font-weight: bold;
+}
+
+.title {
+    color: var(--color-text-primary);
+    font: var(--font-display);
+    font-size: var(--text-2xl);
+    line-height: var(--leading-2xl);
+    font-weight: bold;
+}
+
+.subtitle {
+    color: var(--color-text-muted);
+    font: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: var(--leading-base);
+
+}
