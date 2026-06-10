@@ -2,6 +2,7 @@ import Header from "@/components/layout/Header";
 import Hero from "@/components/sections/Hero";
 import './globals.css'
 import TaskSection from "@/components/sections/TasksSection";
+import CollageSection from "@/components/sections/CollageSection";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <Header />
       <Hero/>
       <TaskSection/>
+      <CollageSection/>
     </div>
   );
 }

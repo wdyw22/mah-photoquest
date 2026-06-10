@@ -1,0 +1,118 @@
+.collage {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 60px;
+}
+
+.collageTitle {
+    color: var(--color-text-primary);
+    font-size: var(--text-2xl);
+    font-weight: bold;
+    line-height: var(--leading-2xl);
+    margin-bottom: var(--spacing-4);
+}
+
+/* Сетка коллажа */
+.collageGrid {
+    background-color: var(--color-text-primary);
+    padding: var(--spacing-2);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-5);
+}
+
+.collageCell {
+    background-color: #3a3a3a;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.collageCellNumber {
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--text-xl);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Форма отправки */
+.collageForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+.formTitle {
+    color: var(--color-text-primary);
+    font-size: var(--text-xl);
+    font-weight: bold;
+    line-height: var(--leading-xl);
+}
+
+.formInner {
+    background-color: var(--color-text-primary);
+    border-radius: 8px;
+    padding: var(--spacing-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.formLabel {
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--text-base);
+    line-height: var(--leading-base);
+    color: var(--color-bg);
+}
+
+.formInput {
+    background-color: #f5f0e8;
+    border: none;
+    border-radius: 4px;
+    padding: var(--spacing-3);
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--text-base);
+    line-height: var(--leading-base);
+    color: var(--color-text-primary);
+    outline: none;
+    width: 100%;
+}
+
+.formInput::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.formInput:focus {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+.submitButton {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    border: none;
+    border-radius: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--text-base);
+    line-height: var(--leading-base);
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: var(--spacing-1);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 0.1s ease, transform 0.1s ease;
+}
+
+.submitButton:active {
+    opacity: 0.8;
+    transform: scale(0.98);
+}
