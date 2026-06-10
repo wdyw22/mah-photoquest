@@ -7,15 +7,15 @@ const Header = () => {
     <header className={styles.header}>
       <div className="container">
         <div className={styles.nav}>
-          <button href="#">
+          <a href="#" className={styles.logo}>
               <Image 
                   src="/images/logo.svg" 
                   alt="Музей Академии Художеств" 
                   width={150} 
                   height={35} 
               />
-          </button>
-          <button>
+          </a>
+          <button type="button">
               <Image
                   src="/images/menu.svg"
                   alt="Меню"

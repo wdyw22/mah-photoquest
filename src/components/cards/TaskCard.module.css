@@ -1,0 +1,63 @@
+.taskCard {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 32px;
+}
+
+.taskCard:last-of-type {
+    margin-bottom: 0;
+}
+
+.taskButton {
+    display: block;
+    padding: 0;
+    border: none;
+    background: none;
+    line-height: 0;
+    cursor: pointer;
+    transition: transform 0.1s ease, opacity 0.1s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.taskButton:active {
+    transform: scale(0.97);
+    opacity: 0.85;
+}
+
+.taskTitleContainer {
+    background-color: var(--color-bg);
+    border-radius: 8px;
+    padding: var(--spacing-3) var(--spacing-3);
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.taskTitle {
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--text-md);
+    line-height: var(--leading-base);
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+.taskDescription {
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--text-sm);
+    line-height: var(--leading-sm);
+    color: var(--color-text-muted);
+}
+
+.taskHint {
+    padding: var(--spacing-3);
+    box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.taskHintText {
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--text-sm);
+    line-height: var(--leading-sm);
+    color: var(--color-text-muted);
+}
