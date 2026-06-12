@@ -1,0 +1,15 @@
+.collageCell {
+    background-color: #2B2B2B;
+    width: 98px;
+    height: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(82, 79, 79, 1)
+}
+
+.collageCellNumber {
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--text-base);
+    color: var(--color-bg);
+}

@@ -1,0 +1,7 @@
+.collageGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 16px;
+    background-color: var(--color-text-primary);
+}
