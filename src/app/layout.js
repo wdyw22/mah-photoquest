@@ -1,4 +1,5 @@
 import { Playfair_Display, Open_Sans } from 'next/font/google'
+import { QuestProvider } from '@/context/QuestContext'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -21,7 +22,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ru" className={`${playfair.variable} ${openSans.variable}`}>
-      <body>{children}</body>
+      <body>
+        <QuestProvider>
+          {children}
+        </QuestProvider>
+      </body>
     </html>
   )
 }

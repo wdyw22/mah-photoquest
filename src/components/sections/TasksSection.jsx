@@ -1,11 +1,14 @@
+'use client'
+import { useQuest } from '@/context/QuestContext'
 import TaskCard from '../cards/TaskCard'
 import styles from './TasksSection.module.css'
 
 const TaskSection = () => {
-    const completed = 3
+    const { completed, task } = useQuest()
     const total = 9
     const progress = (completed / total) * 100
-    const taskNumber = total - completed + 1
+    const taskNumber = task + 1
+    const taskDescription = `Описание задания`
 
     return ( 
         <section className={`${styles.tasks} container`}>
@@ -19,12 +22,11 @@ const TaskSection = () => {
                 </div>
                 <div className={styles.taskInfo}>
                     <span className={styles.taskProgress}>{completed} из {total} заданий выполнено</span>
-                    <span className={styles.taskTitle}>Задание {taskNumber}: Тень</span>
+                    <span className={styles.taskTitle}>Задание {taskNumber}: {taskDescription}</span>
                 </div>
             </div>
-            <TaskCard taskNumber={taskNumber} taskDescription="Описание задания" />
-            <TaskCard taskNumber={taskNumber + 1} taskDescription="Описание задания" hint="Обрати внимание на нижний левый угол" />
-            <button className={styles.CollageButton}>Собрать свой коллаж</button>
+            <TaskCard taskNumber={1} taskDescription={taskDescription} />
+            <TaskCard taskNumber={2} taskDescription={taskDescription} hint="Обрати внимание на нижний левый угол" />
         </section>
     )
 }

@@ -16,14 +16,6 @@
     background: none;
     line-height: 0;
     cursor: pointer;
-    transition: transform 0.1s ease, opacity 0.1s ease;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-}
-
-.taskButton:active {
-    transform: scale(0.97);
-    opacity: 0.85;
 }
 
 .taskTitleContainer {
@@ -48,6 +40,29 @@
     font-size: var(--text-sm);
     line-height: var(--leading-sm);
     color: var(--color-text-muted);
+}
+
+.addPhotoButton {
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: var(--color-text-primary);
+    color: var(--color-bg);
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--text-sm);
+    line-height: var(--leading-sm);
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.addPhotoButton:hover {
+    opacity: 0.9;
+}
+
+.addPhotoButton:active {
+    transform: scale(0.98);
 }
 
 .taskHint {
