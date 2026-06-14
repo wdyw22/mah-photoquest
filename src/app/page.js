@@ -7,7 +7,7 @@ import Footer from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <div>
+    <div style={{ paddingTop: '76px' }}>
       <Header />
       <Hero/>
       <TaskSection/>

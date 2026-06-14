@@ -10,8 +10,8 @@ const TaskSection = () => {
     const taskNumber = task + 1
     const taskDescription = `Описание задания`
 
-    return ( 
-        <section className={`${styles.tasks} container`}>
+    return (
+        <section id="tasks" className={`${styles.tasks} container`}>
             <h2 className={styles.tasksTitle}>Твои задания</h2>
             <div className={styles.tasksBar}>
                 <div className={styles.barTrack}>

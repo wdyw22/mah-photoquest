@@ -23,7 +23,7 @@ const CollageSection = () => {
     }
 
     return (
-        <section className={`${styles.collage} container`}>
+        <section id="collage" className={`${styles.collage} container`}>
             <h2 className={styles.collageTitle}>Твой коллаж</h2>
             <CollageGrid />
             <h3 className={styles.collageSubtitle}>Отправить коллаж</h3>

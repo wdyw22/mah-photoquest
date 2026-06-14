@@ -1,8 +1,8 @@
 import styles from "./Footer.module.css"
 
 const Footer = () => {
-    return ( 
-        <div className={styles.footer}>
+    return (
+        <div id="footer" className={styles.footer}>
             <span className={styles.title}>
                 Научно-исследовательский музей при <br/> Российской Академии художеств
             </span>

@@ -8,4 +8,137 @@
 .header {
     background-color: var(--color-bg);
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 98;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.menuButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    transition: opacity 0.2s ease;
+}
+
+.menuButton:hover {
+    opacity: 0.7;
+}
+
+.menuButton:active {
+    opacity: 0.5;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    animation: fadeIn 0.3s ease;
+}
+
+.mobileMenu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--color-bg);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    animation: slideIn 0.3s ease;
+    overflow-y: auto;
+    padding-top: 80px;
+}
+
+.menuList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menuItem {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    animation: slideInDown 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.menuList a {
+    display: block;
+    padding: 16px 24px;
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.menuList a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(157, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.menuList a:hover::before {
+    left: 0;
+}
+
+.menuList a:hover {
+    padding-left: 32px;
+    color: var(--color-accent);
+    font-weight: 500;
+}
+
+.menuList a:active {
+    background-color: #ebebeb;
+    transform: scale(0.98);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
