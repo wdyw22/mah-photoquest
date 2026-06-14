@@ -1,5 +1,6 @@
 .collage {
     margin-top: var(--spacing-6);
+    margin-bottom: 60px;
 }
 
 .collageTitle {
@@ -11,9 +12,9 @@
 
 .collageSubtitle {
     margin-top: var(--spacing-4);
-    font-size: var(--text-md);
+    font-size: var(--text-lg);
     line-height: var(--leading-sm);
-    margin-bottom: var(--spacing-2);
+    margin-bottom: var(--spacing-3);
 }
 
 .collageForm {

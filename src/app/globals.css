@@ -1,5 +1,7 @@
 /* ─── Сброс ─── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -8,55 +10,55 @@
 /* ─── Переменные ─── */
 :root {
   /* Цвета */
-  --color-accent:           #9d0000;
-  --color-bg:               #ffffff;
-  --color-bg-dark:          #0c1821;
-  --color-bg-card:          #111111;
-  --color-bg-collage:       #2b2b2b;
-  --color-text-primary:     #000000;
-  --color-text-secondary:   rgba(0, 0, 0, 0.6);
-  --color-text-light:       #cbcbcb;
-  --color-text-muted:       #666666;
-  --color-border:           #524f4f;
-  --color-input-bg:         #f7f7f4;
+  --color-accent: #9d0000;
+  --color-bg: #ffffff;
+  --color-bg-dark: #0c1821;
+  --color-bg-card: #111111;
+  --color-bg-collage: #2b2b2b;
+  --color-text-primary: #000000;
+  --color-text-secondary: rgba(0, 0, 0, 0.6);
+  --color-text-light: #cbcbcb;
+  --color-text-muted: #666666;
+  --color-border: #524f4f;
+  --color-input-bg: #f7f7f4;
   --color-input-placeholder: rgba(0, 0, 0, 0.45);
 
   /* Шрифты */
   --font-display: var(--font-display);
-  --font-body:    var(--font-body);
+  --font-body: var(--font-body);
 
   /* Размеры шрифтов */
-  --text-xs:   12px;
-  --text-sm:   14px;
+  --text-xs: 12px;
+  --text-sm: 14px;
   --text-base: 16px;
-  --text-md:   18px;
-  --text-lg:   22px;
-  --text-xl:   38px;
-  --text-2xl:  48px;
+  --text-md: 18px;
+  --text-lg: 24px;
+  --text-xl: 38px;
+  --text-2xl: 48px;
 
   /* Line-height */
   --leading-xxs: 14px;
-  --leading-xs:   16px;
-  --leading-sm:   20px;
+  --leading-xs: 16px;
+  --leading-sm: 20px;
   --leading-base: 24px;
-  --leading-md:   26px;
-  --leading-lg:   30px;
-  --leading-xl:   46px;
-  --leading-2xl:  54px;
+  --leading-md: 26px;
+  --leading-lg: 30px;
+  --leading-xl: 46px;
+  --leading-2xl: 54px;
 
   /* Отступы */
-  --spacing-1:  4px;
-  --spacing-2:  8px;
-  --spacing-3:  16px;
-  --spacing-4:  24px;
-  --spacing-5:  32px;
-  --spacing-6:  48px;
-  --spacing-7:  64px;
-  --spacing-8:  96px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 16px;
+  --spacing-4: 24px;
+  --spacing-5: 32px;
+  --spacing-6: 48px;
+  --spacing-7: 64px;
+  --spacing-8: 96px;
 
   /* Страница */
   --page-padding: 16px;
-  --max-width:    1200px;
+  --max-width: 1200px;
 }
 
 /* ─── База ─── */
@@ -66,20 +68,24 @@ html {
 }
 
 body {
-  font-family:      var(--font-body), 'Open Sans', sans-serif;
-  font-size:        var(--text-base);
-  line-height:      var(--leading-base);
-  color:            var(--color-text-primary);
+  font-family: var(--font-body), 'Open Sans', sans-serif;
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+  color: var(--color-text-primary);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--font-display), 'Playfair Display', serif;
   font-weight: 700;
 }
 
-img, video {
+img,
+video {
   display: block;
   max-width: 100%;
 }
@@ -108,6 +114,12 @@ a {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--page-padding);
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .visually-hidden {

@@ -1,0 +1,30 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: var(--spacing-5) 16px 16px 16px;
+    background-color: #0C1821;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.title {
+    font-size: 14px;
+    line-height: 20px;
+    color: #CBCBCB;
+    margin: 0;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.copy,
+.rights,
+.org {
+    margin: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #CBCBCB;
+}

@@ -26,7 +26,7 @@ const CollageSection = () => {
         <section className={`${styles.collage} container`}>
             <h2 className={styles.collageTitle}>Твой коллаж</h2>
             <CollageGrid />
-            <h3 className={styles.collageSubtitle}>Отправить коллаж экскурсоводу</h3>
+            <h3 className={styles.collageSubtitle}>Отправить коллаж</h3>
             <form className={styles.collageForm} onSubmit={handleSubmit}>
                 <label
                     htmlFor="participantName"
