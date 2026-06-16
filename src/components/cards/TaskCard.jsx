@@ -28,30 +28,28 @@ const TaskCard = ({ taskNumber, taskDescription, hint }) => {
 
     return (
         <div className={styles.taskCard}>
-            <div id="taskButton" className={styles.taskButton}>
+            <div className={styles.taskImage}>
                 {photoUrl ? (
                     <Image
-                        loading="eager"
                         src={photoUrl}
                         alt="Загруженное фото"
-                        width={358}
-                        height={280}
-                        style={{ pointerEvents: 'none' }}
+                        fill
+                        sizes="(min-width: 1025px) 430px, calc(100vw - 32px)"
+                        className={styles.taskImageContent}
                     />
                 ) : (
                     <Image
-                        loading="eager"
                         src="/images/tasksBG.svg"
                         alt="Место для фото"
-                        width={358}
-                        height={280}
-                        style={{ pointerEvents: 'none' }}
+                        fill
+                        sizes="(min-width: 1025px) 430px, calc(100vw - 32px)"
+                        className={styles.taskImageContent}
                     />
                 )
             }
             </div>
             <div className={styles.taskTitleContainer}>
-                <h1 className={styles.taskTitle}>Задание {taskNumber}</h1>
+                <h3 className={styles.taskTitle}>Задание {taskNumber}</h3>
                 <p className={styles.taskDescription}>{taskDescription}</p>
                 <button
                     className={styles.addPhotoButton}

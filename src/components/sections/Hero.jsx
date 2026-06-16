@@ -1,12 +1,11 @@
 import styles from './Hero.module.css'
-import '../../../src/app/globals.css'
 
 const Hero = () => {
   return (
     <section id="hero" className={`${styles.hero} container`}>
       <div className={styles.accent}>ФОТО-КВЕСТ</div>
-      <div className={styles.title}>Искусство<br />в деталях</div>
-      <div className={styles.subtitle}>Исследуй картины, находи <br/> детали и собери свой коллаж</div>
+      <h1 className={styles.title}>Искусство<br />в деталях</h1>
+      <p className={styles.subtitle}>Исследуй картины, находи детали и собери свой коллаж</p>
     </section>
   )
 }

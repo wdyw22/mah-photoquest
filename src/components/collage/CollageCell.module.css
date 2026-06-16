@@ -1,11 +1,14 @@
 .collageCell {
     background-color: #2B2B2B;
-    width: 98px;
-    height: 104px;
+    width: 100%;
+    aspect-ratio: 98 / 104;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px dashed rgba(82, 79, 79, 1)
+    border: 1px dashed rgba(82, 79, 79, 1);
 }
 
 .collageCellNumber {

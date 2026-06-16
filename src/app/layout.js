@@ -1,18 +1,5 @@
-import { Playfair_Display, Open_Sans } from 'next/font/google'
 import { QuestProvider } from '@/context/QuestContext'
 import './globals.css'
-
-const playfair = Playfair_Display({
-  subsets: ['latin', 'cyrillic'],
-  weight: ['400', '700'],
-  variable: '--font-display',
-})
-
-const openSans = Open_Sans({
-  subsets: ['latin', 'cyrillic'],
-  weight: ['400', '600', '700'],
-  variable: '--font-body',
-})
 
 export const metadata = {
   title: 'Искусство в деталях',
@@ -21,7 +8,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ru" className={`${playfair.variable} ${openSans.variable}`}>
+    <html lang="ru">
       <body>
         <QuestProvider>
           {children}

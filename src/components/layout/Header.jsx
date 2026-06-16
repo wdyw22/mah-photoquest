@@ -16,6 +16,13 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
+  const menuItems = [
+    { href: '#hero', label: 'Главная' },
+    { href: '#tasks', label: 'Задания' },
+    { href: '#collage', label: 'Коллаж' },
+    { href: '#footer', label: 'Контакты' },
+  ];
+
   return (
     <header className={styles.header}>
       <div className="container">
@@ -28,12 +35,26 @@ const Header = () => {
                   height={35}
               />
           </a>
+
+          {/* Desktop Menu */}
+          <nav className={styles.desktopMenu}>
+            <ul className={styles.desktopMenuList}>
+              {menuItems.map((item) => (
+                <li key={item.href}>
+                  <a href={item.href}>{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Mobile Menu Button */}
           <button
             type="button"
             className={styles.menuButton}
             onClick={toggleMenu}
-            aria-label="Открыть меню"
+            aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
             aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
           >
               <Image
                   src="/images/menu.svg"
@@ -45,34 +66,22 @@ const Header = () => {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <>
           <div
             className={styles.overlay}
             onClick={closeMenu}
           />
-          <nav className={styles.mobileMenu}>
+          <nav id="mobile-menu" className={styles.mobileMenu}>
             <ul className={styles.menuList}>
-              <li className={styles.menuItem} style={{ animationDelay: '0.1s' }}>
-                <a href="#hero" onClick={closeMenu}>
-                  Главная
-                </a>
-              </li>
-              <li className={styles.menuItem} style={{ animationDelay: '0.2s' }}>
-                <a href="#tasks" onClick={closeMenu}>
-                  Задания
-                </a>
-              </li>
-              <li className={styles.menuItem} style={{ animationDelay: '0.3s' }}>
-                <a href="#collage" onClick={closeMenu}>
-                  Коллаж
-                </a>
-              </li>
-              <li className={styles.menuItem} style={{ animationDelay: '0.4s' }}>
-                <a href="#footer" onClick={closeMenu}>
-                  Контакты
-                </a>
-              </li>
+              {menuItems.map((item, index) => (
+                <li key={item.href} className={styles.menuItem} style={{ animationDelay: `${(index + 1) * 0.1}s` }}>
+                  <a href={item.href} onClick={closeMenu}>
+                    {item.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </nav>
         </>
@@ -82,4 +91,3 @@ const Header = () => {
 }
 
 export default Header;
-

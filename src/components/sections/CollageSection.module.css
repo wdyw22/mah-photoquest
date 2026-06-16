@@ -1,6 +1,19 @@
 .collage {
     margin-top: var(--spacing-6);
     margin-bottom: 60px;
+    min-width: 0;
+}
+
+@media (min-width: 1025px) {
+    .collage {
+        position: sticky;
+        top: 106px;
+        margin-top: 0;
+        margin-bottom: 0;
+        width: 100%;
+        max-width: none;
+        padding: 0;
+    }
 }
 
 .collageTitle {
@@ -10,16 +23,49 @@
     margin-bottom: var(--spacing-4);
 }
 
+@media (min-width: 1025px) {
+    .collageTitle {
+        font-size: 34px;
+        line-height: 42px;
+    }
+}
+
 .collageSubtitle {
     margin-top: var(--spacing-4);
     font-size: var(--text-lg);
-    line-height: var(--leading-sm);
+    line-height: var(--leading-lg);
     margin-bottom: var(--spacing-3);
 }
 
 .collageForm {
     padding: var(--spacing-3);
     background-color: var(--color-text-primary);
+    border-radius: 8px;
+}
+
+@media (min-width: 1025px) {
+    .collageForm {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: var(--spacing-3);
+        row-gap: var(--spacing-2);
+        align-items: end;
+        padding: var(--spacing-4);
+    }
+
+    .collageInput {
+        margin-bottom: 0;
+    }
+
+    .collageInput:last-of-type {
+        margin-bottom: 0;
+    }
+
+    .collageButton {
+        grid-column: 1 / -1;
+        max-width: 240px;
+        margin-top: var(--spacing-2);
+    }
 }
 
 .collageLabel {
@@ -34,20 +80,27 @@
     border: none;
     padding: var(--spacing-3);
     font-family: 'Open Sans', sans-serif;
-    font-size: var(--text-sm);
-    line-height: 14px;
+    font-size: var(--text-base);
+    line-height: var(--leading-base);
     margin-bottom: var(--spacing-3);
+    min-height: 48px;
+    border-radius: 6px;
 }
 
-.collageInput:last-of-type {
+.collageField:last-of-type .collageInput {
     margin-bottom: 24px;
+}
+
+.collageField {
+    min-width: 0;
 }
 
 
 .collageButton {
     width: 100%;
-    padding: 9px 18px;
-    border-radius: 16px;
+    min-height: 44px;
+    padding: 10px 18px;
+    border-radius: 8px;
     background-color: var(--color-bg);
     color: var(--color-text-primary);
     font-family: 'Open Sans', sans-serif;
@@ -55,7 +108,7 @@
     font-weight: 600;
     line-height: var(--leading-xs);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .collageButton:hover {
@@ -66,4 +119,10 @@
 .collageButton:active {
     transform: scale(0.98) translateY(0);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 1025px) {
+    .collageField:last-of-type .collageInput {
+        margin-bottom: 0;
+    }
 }

@@ -7,7 +7,7 @@ const TaskSection = () => {
     const { completed, task } = useQuest()
     const total = 9
     const progress = (completed / total) * 100
-    const taskNumber = task + 1
+    const taskNumber = task === -1 ? total : task + 1
     const taskDescription = `Описание задания`
 
     return (

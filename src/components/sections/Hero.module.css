@@ -2,13 +2,21 @@
     margin-top: 60px;
     display: flex;
     flex-direction: column;
-    column-gap: 16px;
+    gap: 8px;
     margin-bottom: 60px;
+}
+
+@media (min-width: 1025px) {
+    .hero {
+        margin-top: 80px;
+        margin-bottom: 80px;
+        gap: 12px;
+    }
 }
 
 .accent {
     color: var(--color-accent);
-    font: var(--font-display);
+    font-family: var(--font-display), 'Playfair Display', serif;
     font-size: var(--text-xs);
     line-height: var(--leading-xxs);
     font-weight: bold;
@@ -16,17 +24,24 @@
 
 .title {
     color: var(--color-text-primary);
-    font: var(--font-display);
-    font-size: var(--text-2xl);
-    line-height: var(--leading-2xl);
+    font-family: var(--font-display), 'Playfair Display', serif;
+    font-size: clamp(44px, 10vw, var(--text-2xl));
+    line-height: 1.12;
     font-weight: bold;
+}
+
+@media (min-width: 1025px) {
+    .title {
+        font-size: 56px;
+        line-height: 62px;
+    }
 }
 
 .subtitle {
     color: var(--color-text-muted);
-    font: var(--font-body);
+    font-family: var(--font-body), 'Open Sans', sans-serif;
     font-size: var(--text-base);
     font-weight: 400;
     line-height: var(--leading-base);
-
+    max-width: 420px;
 }

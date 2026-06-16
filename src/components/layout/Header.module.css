@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 74px;
     padding: 16px 0;
 }
 
@@ -25,8 +26,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     padding: 0;
     transition: opacity 0.2s ease;
 }
@@ -37,6 +38,59 @@
 
 .menuButton:active {
     opacity: 0.5;
+}
+
+/* Desktop Menu */
+.desktopMenu {
+    display: none;
+}
+
+@media (min-width: 1025px) {
+    .desktopMenu {
+        display: block;
+    }
+
+    .desktopMenuList {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: var(--spacing-6);
+        align-items: center;
+    }
+
+    .desktopMenuList a {
+        color: var(--color-text-primary);
+        font-family: 'Open Sans', sans-serif;
+        font-size: var(--text-base);
+        line-height: var(--leading-base);
+        transition: all 0.3s ease;
+        position: relative;
+        text-decoration: none;
+    }
+
+    .desktopMenuList a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--color-accent);
+        transition: width 0.3s ease;
+    }
+
+    .desktopMenuList a:hover::after {
+        width: 100%;
+    }
+
+    .desktopMenuList a:hover {
+        color: var(--color-accent);
+    }
+
+    .menuButton {
+        display: none;
+    }
 }
 
 .overlay {
@@ -55,13 +109,20 @@
     top: 0;
     right: 0;
     width: 280px;
-    height: 100vh;
+    height: 100dvh;
     background-color: var(--color-bg);
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
     z-index: 100;
     animation: slideIn 0.3s ease;
     overflow-y: auto;
     padding-top: 80px;
+}
+
+@media (min-width: 1025px) {
+    .overlay,
+    .mobileMenu {
+        display: none;
+    }
 }
 
 .menuList {

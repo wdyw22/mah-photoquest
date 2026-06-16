@@ -24,8 +24,8 @@
   --color-input-placeholder: rgba(0, 0, 0, 0.45);
 
   /* Шрифты */
-  --font-display: var(--font-display);
-  --font-body: var(--font-body);
+  --font-display: 'Playfair Display';
+  --font-body: 'Open Sans';
 
   /* Размеры шрифтов */
   --text-xs: 12px;
@@ -59,6 +59,13 @@
   /* Страница */
   --page-padding: 16px;
   --max-width: 1200px;
+
+  /* Breakpoints */
+  --mobile-start: 320px;
+  --mobile-end: 640px;
+  --tablet-start: 641px;
+  --tablet-end: 1024px;
+  --desktop-start: 1025px;
 }
 
 /* ─── База ─── */
@@ -74,6 +81,7 @@ body {
   color: var(--color-text-primary);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 h1,
@@ -95,6 +103,7 @@ button {
   border: none;
   background: none;
   font-family: var(--font-body), 'Open Sans', sans-serif;
+  touch-action: manipulation;
 }
 
 input {
@@ -117,7 +126,7 @@ a {
 }
 
 .page {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
 }
@@ -128,4 +137,27 @@ a {
   height: 1px;
   overflow: hidden;
   clip: rect(0 0 0 0);
+}
+
+@media (min-width: 641px) {
+  :root {
+    --page-padding: 24px;
+  }
+}
+
+@media (min-width: 1025px) {
+  :root {
+    --page-padding: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

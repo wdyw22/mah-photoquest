@@ -1,7 +1,21 @@
 .collageGrid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    padding: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-3);
+    padding: var(--spacing-3);
     background-color: var(--color-text-primary);
+    border-radius: 8px;
+}
+
+@media (min-width: 641px) {
+    .collageGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1025px) {
+    .collageGrid {
+        grid-template-columns: repeat(3, 1fr);
+        padding: var(--spacing-4);
+    }
 }

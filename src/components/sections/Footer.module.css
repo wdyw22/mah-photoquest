@@ -7,6 +7,20 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+@media (min-width: 1025px) {
+    .footer {
+        padding: var(--spacing-6) max(var(--page-padding), calc((100vw - var(--max-width)) / 2 + var(--page-padding)));
+        gap: 32px;
+    }
+
+    .info {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: var(--spacing-4);
+        max-width: var(--max-width);
+    }
+}
+
 .title {
     font-size: 14px;
     line-height: 20px;

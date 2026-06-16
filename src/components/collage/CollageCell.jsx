@@ -9,9 +9,13 @@ const CollageCell = ({ cellNumber }) => {
     return (
         <div
             className={styles.collageCell}
-            style={image ? { backgroundImage: `url(${image})`, backgroundSize: '100% 100%', backgroundPosition: 'center' } : {}}
+            style={image ? { backgroundImage: `url(${image})` } : {}}
         >
-            {!image && <button className={styles.collageCellNumber}>{cellNumber}</button>}
+            {!image && (
+                <button type="button" className={styles.collageCellNumber}>
+                    {cellNumber}
+                </button>
+            )}
         </div>
      );
 }
