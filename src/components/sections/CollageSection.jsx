@@ -1,11 +1,14 @@
 'use client'
 import CollageGrid from '../collage/CollageGrid'
 import styles from './CollageSection.module.css'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
+import html2canvas from 'html2canvas'
 
 
 const CollageSection = () => {
+    const collageRef = useRef(null);
+
     const [formData, setFormData] = useState({
         participantName: '',
         collageName: ''
@@ -22,11 +25,31 @@ const CollageSection = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        const canvas = await html2canvas(collageRef.current)
+
+        const blob = await new Promise(resolve =>
+            canvas.toBlob(resolve, 'image/png')
+        )
+        const fileName = `${Date.now()}.png`
+
+        const { error: uploadError } = await supabase.storage
+            .from('collage')
+            .upload(fileName, blob)
+
+        if (uploadError) {
+            throw uploadError 
+        }
+
+        const { data } = supabase.storage
+            .from('collage')
+            .getPublicUrl(fileName)
+
         const { error } = await supabase
             .from('collages')
             .insert({
                 author_name: formData.participantName,
                 collage_title: formData.collageName,
+                image_url: data.publicUrl,
             })
 
         if (error) {
@@ -37,7 +60,7 @@ const CollageSection = () => {
     return (
         <section id="collage" className={`${styles.collage} container`}>
             <h2 className={styles.collageTitle}>Твой коллаж</h2>
-            <CollageGrid />
+            <CollageGrid ref={collageRef}/>
             <h3 className={styles.collageSubtitle}>Отправить коллаж</h3>
             <form className={styles.collageForm} onSubmit={handleSubmit}>
                 <div className={styles.collageField}>
