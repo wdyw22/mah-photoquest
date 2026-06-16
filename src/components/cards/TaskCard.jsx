@@ -5,13 +5,11 @@ import styles from './TaskCard.module.css'
 import Image from "next/image";
 import { useQuest } from '@/context/QuestContext'
 
-const TaskCard = ({ taskNumber, taskDescription, hint }) => {
+const TaskCard = ({ taskId, taskNumber, taskDescription, hint }) => {
     const fileInputRef = useRef(null)
 
     const [photoUrl, setPhotoUrl] = useState(null)
     const { addPhotoUrl } = useQuest()
-
-    const taskIndex = taskNumber - 1;
 
     const handlePhotoClick = () => {
         fileInputRef.current?.click()
@@ -22,7 +20,8 @@ const TaskCard = ({ taskNumber, taskDescription, hint }) => {
         if (file) {
             const url = URL.createObjectURL(file)
             setPhotoUrl(url)
-            addPhotoUrl(taskIndex, url)
+            addPhotoUrl(taskId, url)
+
         }
     }
 
@@ -44,6 +43,7 @@ const TaskCard = ({ taskNumber, taskDescription, hint }) => {
                         fill
                         sizes="(min-width: 1025px) 430px, calc(100vw - 32px)"
                         className={styles.taskImageContent}
+                        loading='eager'
                     />
                 )
             }

@@ -3,12 +3,17 @@ import { useQuest } from '@/context/QuestContext'
 import TaskCard from '../cards/TaskCard'
 import styles from './TasksSection.module.css'
 
+
 const TaskSection = () => {
-    const { completed, task } = useQuest()
-    const total = 9
-    const progress = (completed / total) * 100
-    const taskNumber = task === -1 ? total : task + 1
-    const taskDescription = `Описание задания`
+    const { completed, task, tasks } = useQuest()
+    console.log(task)
+    const total = tasks.length;
+    const progress = (completed / total) * 100;
+
+    const taskNumber = task === null ? total : tasks.findIndex(t => t.id === task) + 1
+    const currentTask = tasks.find(t => t.id === task)
+    const taskTitle = currentTask ? currentTask.title : 'Все задания выполнены!'
+
 
     return (
         <section id="tasks" className={`${styles.tasks} container`}>
@@ -22,11 +27,17 @@ const TaskSection = () => {
                 </div>
                 <div className={styles.taskInfo}>
                     <span className={styles.taskProgress}>{completed} из {total} заданий выполнено</span>
-                    <span className={styles.taskTitle}>Задание {taskNumber}: {taskDescription}</span>
+                    <span className={styles.taskTitle}>Задание {taskNumber}: {taskTitle}</span>
                 </div>
             </div>
-            <TaskCard taskNumber={1} taskDescription={taskDescription} />
-            <TaskCard taskNumber={2} taskDescription={taskDescription} hint="Обрати внимание на нижний левый угол" />
+            {tasks.map((t) => (
+                <TaskCard 
+                    key={t.id} 
+                    taskId={t.id} 
+                    taskNumber={t.order_index} 
+                    taskDescription={t.description}
+                />
+            ))}
         </section>
     )
 }

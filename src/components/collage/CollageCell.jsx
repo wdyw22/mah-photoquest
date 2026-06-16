@@ -2,9 +2,9 @@ import styles from './CollageCell.module.css';
 import { useQuest } from '@/context/QuestContext'
 
 
-const CollageCell = ({ cellNumber }) => {
+const CollageCell = ({ cellNumber, taskId }) => {
     const { photoUrls } = useQuest();
-    const image = photoUrls[cellNumber - 1];
+    const image = photoUrls[taskId];
 
     return (
         <div

@@ -7,13 +7,14 @@ const QuestContext = createContext()
 
 export const QuestProvider = ({ children }) => {
     const [tasks, setTasks] = useState([])
-    const [photoUrls, setPhotoUrls] = useState([])
+    const [photoUrls, setPhotoUrls] = useState({})
 
     useEffect(() => {
         const loadTasks = async () => {
             const { data, error } = await supabase
                 .from('tasks')
                 .select('*')
+                .order('order_index')
             if (!error) {
                 setTasks(data)
             }
@@ -21,24 +22,19 @@ export const QuestProvider = ({ children }) => {
         loadTasks()
     }, [])
 
-    useEffect(() => {
-        if (tasks.length === 0) return
-        setPhotoUrls(Array(tasks.length).fill(null))
-    }, [tasks])
-
-    const addPhotoUrl = (index, url) => {
-        setPhotoUrls(prev => {
-            const updated = [...prev]
-            updated[index] = url
-            return updated  
+    const addPhotoUrl = (taskId, url) => {
+        setPhotoUrls(prev => ({
+            ...prev,
+            [taskId]: url
         })
-    }
+    )}
     
-    const task = photoUrls.findIndex(t => t === null)
-    const completed = photoUrls.filter(Boolean).length
+    const nextTask = tasks.find(t => !photoUrls[t.id])?.id || null
+    const completed = Object.values(photoUrls).filter(Boolean).length
+
     
     return (
-        <QuestContext.Provider value={{ photoUrls, addPhotoUrl, completed, task }}>
+        <QuestContext.Provider value={{ photoUrls, addPhotoUrl, completed, task: nextTask, tasks }}>
             {children}
         </QuestContext.Provider>
      )

@@ -1,16 +1,22 @@
 import styles from './CollageGrid.module.css';
 import CollageCell from './CollageCell';
 import { forwardRef } from 'react';
+import { useQuest } from '@/context/QuestContext'
 
 const CollageGrid = forwardRef((props, ref) => {
+    const { tasks } = useQuest()
     return ( 
         <div 
             ref={ref}
             className={styles.collageGrid}
         >
-            {Array.from({ length: 9 }, (_, i) => (
-                <CollageCell key={i} cellNumber={i + 1} />
-            ))}
+            {tasks.map((task, i) => (
+                <CollageCell 
+                    key={task.id} 
+                    cellNumber={i + 1} 
+                    askId={task.id} 
+                />
+))}
         </div>
      );
 });
