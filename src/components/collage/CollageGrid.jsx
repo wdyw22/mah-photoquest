@@ -3,7 +3,7 @@ import CollageCell from './CollageCell';
 import { forwardRef } from 'react';
 import { useQuest } from '@/context/QuestContext'
 
-const CollageGrid = forwardRef((props, ref) => {
+const CollageGrid = forwardRef((_, ref) => {
     const { tasks } = useQuest()
     return ( 
         <div 
@@ -14,9 +14,9 @@ const CollageGrid = forwardRef((props, ref) => {
                 <CollageCell 
                     key={task.id} 
                     cellNumber={i + 1} 
-                    askId={task.id} 
+                    taskId={task.id} 
                 />
-))}
+            ))}
         </div>
      );
 });

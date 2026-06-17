@@ -6,15 +6,12 @@ import styles from './TasksSection.module.css'
 
 const TaskSection = () => {
     const { completed, task, tasks } = useQuest()
-    console.log(task)
     const total = tasks.length;
     const progress = (completed / total) * 100;
 
     const taskNumber = task === null ? total : tasks.findIndex(t => t.id === task) + 1
     const currentTask = tasks.find(t => t.id === task)
     const taskTitle = currentTask ? currentTask.title : 'Все задания выполнены!'
-
-
     return (
         <section id="tasks" className={`${styles.tasks} container`}>
             <h2 className={styles.tasksTitle}>Твои задания</h2>
@@ -36,6 +33,7 @@ const TaskSection = () => {
                     taskId={t.id} 
                     taskNumber={t.order_index} 
                     taskDescription={t.description}
+                    hint={t.image_hint}
                 />
             ))}
         </section>

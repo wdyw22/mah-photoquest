@@ -9,6 +9,7 @@ const TaskCard = ({ taskId, taskNumber, taskDescription, hint }) => {
     const fileInputRef = useRef(null)
 
     const [photoUrl, setPhotoUrl] = useState(null)
+    const [buttonState, setButtonState] = useState(false)
     const { addPhotoUrl } = useQuest()
 
     const handlePhotoClick = () => {
@@ -21,6 +22,7 @@ const TaskCard = ({ taskId, taskNumber, taskDescription, hint }) => {
             const url = URL.createObjectURL(file)
             setPhotoUrl(url)
             addPhotoUrl(taskId, url)
+            setButtonDisabled(true)
 
         }
     }
@@ -55,6 +57,7 @@ const TaskCard = ({ taskId, taskNumber, taskDescription, hint }) => {
                     className={styles.addPhotoButton}
                     onClick={handlePhotoClick}
                     type="button"
+                    disabled={buttonState}
                 >
                     Добавить фото
                 </button>
