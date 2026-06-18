@@ -28,7 +28,10 @@ const CollageSection = () => {
         if (isSubmitting) return
         setIsSubmitting(true)
 
-        const canvas = await html2canvas(collageRef.current)
+        const canvas = await html2canvas(collageRef.current, {
+            scale: 3,
+            useCORS: true,
+        })
 
         const blob = await new Promise(resolve =>
             canvas.toBlob(resolve, 'image/png')

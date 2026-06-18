@@ -1,0 +1,68 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: var(--spacing-3);
+}
+
+.modal {
+    background-color: var(--color-bg);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.cropArea {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #000;
+}
+
+.controls {
+    padding: var(--spacing-3);
+}
+
+.zoomSlider {
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3);
+    border-top: solid var(--color-border) 1px;
+}
+
+.cancelButton,
+.confirmButton {
+    flex: 1;
+    min-height: 44px;
+    border-radius: 8px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: var(--text-sm);
+}
+
+.cancelButton {
+    border: solid var(--color-border) 1px;
+    background: none;
+}
+
+.confirmButton {
+    background-color: var(--color-text-primary);
+    color: var(--color-bg);
+}
+
+.confirmButton:disabled,
+.cancelButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
