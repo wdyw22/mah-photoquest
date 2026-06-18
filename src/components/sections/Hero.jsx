@@ -5,7 +5,7 @@ const Hero = () => {
     <section id="hero" className={`${styles.hero} container`}>
       <div className={styles.accent}>ФОТО-КВЕСТ</div>
       <h1 className={styles.title}>Искусство<br />в деталях</h1>
-      <p className={styles.subtitle}>Исследуй картины, находи детали и собери свой коллаж</p>
+      <p className={styles.subtitle}>Исследуй картины, находи детали <br/> и собери свой коллаж</p>
     </section>
   )
 }

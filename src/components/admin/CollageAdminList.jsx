@@ -8,6 +8,7 @@ const CollageAdminList = () => {
     const [collages, setCollages] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [downloadingId, setDownloadingId] = useState(null)
 
     useEffect(() => {
         loadCollages()
@@ -45,6 +46,28 @@ const CollageAdminList = () => {
         setCollages(prev => prev.filter(c => c.id !== id))
     }
 
+    const handleDownload = async (collage) => {
+        setDownloadingId(collage.id)
+        try {
+            const response = await fetch(collage.image_url)
+            const blob = await response.blob()
+            const blobUrl = URL.createObjectURL(blob)
+
+            const link = document.createElement('a')
+            link.href = blobUrl
+            link.download = `${collage.collage_title || 'collage'}.png`
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+            URL.revokeObjectURL(blobUrl)
+        } catch (err) {
+            console.error(err)
+            alert('Не удалось скачать файл')
+        } finally {
+            setDownloadingId(null)
+        }
+    }
+
     if (loading) {
         return <p className={styles.status}>Загрузка коллажей...</p>
     }
@@ -71,13 +94,14 @@ const CollageAdminList = () => {
                         <p className={styles.author}>{collage.author_name}</p>
                     </div>
                     <div className={styles.actions}>
-                        <a
-                        href={collage.image_url}
-                            download
+                        <button
+                            type="button"
                             className={styles.downloadButton}
+                            onClick={() => handleDownload(collage)}
+                            disabled={downloadingId === collage.id}
                         >
-                            Скачать
-                        </a>
+                            {downloadingId === collage.id ? 'Скачивание...' : 'Скачать'}
+                        </button>
                         <button
                             className={styles.deleteButton}
                             onClick={() => handleDelete(collage.id)}
