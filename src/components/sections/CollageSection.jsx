@@ -8,6 +8,7 @@ import html2canvas from 'html2canvas'
 
 const CollageSection = () => {
     const collageRef = useRef(null);
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const [formData, setFormData] = useState({
         participantName: '',
@@ -24,6 +25,8 @@ const CollageSection = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        if (isSubmitting) return
+        setIsSubmitting(true)
 
         const canvas = await html2canvas(collageRef.current)
 
@@ -99,7 +102,7 @@ const CollageSection = () => {
                     className={styles.collageButton}
                     type="submit"
                 >
-                    Отправить
+                    {isSubmitting ? 'Отправка...' : 'Отправить'}
                 </button>
             </form>
         </section>

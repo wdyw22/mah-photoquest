@@ -10,18 +10,18 @@ export const QuestProvider = ({ children }) => {
     const [photoUrls, setPhotoUrls] = useState({})
 
     useEffect(() => {
-        const loadTasks = async () => {
-            const { data, error } = await supabase
-                .from('tasks')
-                .select('*')
-                .order('order_index')
-            if (!error) {
-                setTasks(data)
-            }
+    const loadTasks = async () => {
+        const { data, error } = await supabase
+            .from('tasks')
+            .select('*')
+            .order('order_index')
+        console.log('tasks data:', data, 'error:', error)
+        if (!error) {
+            setTasks(data)
         }
-        loadTasks()
-    }, [])
-
+    }
+    loadTasks()
+}, [])
     const addPhotoUrl = (taskId, url) => {
         setPhotoUrls(prev => ({
             ...prev,

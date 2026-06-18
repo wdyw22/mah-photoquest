@@ -22,7 +22,7 @@ const TaskCard = ({ taskId, taskNumber, taskDescription, hint }) => {
             const url = URL.createObjectURL(file)
             setPhotoUrl(url)
             addPhotoUrl(taskId, url)
-            setButtonDisabled(true)
+            setButtonState(true)
 
         }
     }
