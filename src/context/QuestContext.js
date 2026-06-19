@@ -8,6 +8,8 @@ const QuestContext = createContext()
 export const QuestProvider = ({ children }) => {
     const [tasks, setTasks] = useState([])
     const [photoUrls, setPhotoUrls] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
+
 
     useEffect(() => {
     const loadTasks = async () => {
@@ -19,6 +21,7 @@ export const QuestProvider = ({ children }) => {
         if (!error) {
             setTasks(data)
         }
+        setIsLoading(false)
     }
     loadTasks()
 }, [])
@@ -34,7 +37,7 @@ export const QuestProvider = ({ children }) => {
 
     
     return (
-        <QuestContext.Provider value={{ photoUrls, addPhotoUrl, completed, task: nextTask, tasks }}>
+        <QuestContext.Provider value={{ photoUrls, addPhotoUrl, completed, task: nextTask, tasks, isLoading }}>
             {children}
         </QuestContext.Provider>
      )
