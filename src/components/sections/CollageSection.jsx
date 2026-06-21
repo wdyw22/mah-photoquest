@@ -3,12 +3,15 @@ import CollageGrid from '../collage/CollageGrid'
 import styles from './CollageSection.module.css'
 import { useState, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
-import html2canvas from 'html2canvas'
+import { useQuest } from '@/context/QuestContext'
+import { computeLayout } from '../collage/layoutAlgorithm'
+import { renderCollageToCanvas } from '../collage/renderCollageCanvas'
 
 
 const CollageSection = () => {
     const collageRef = useRef(null);
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const { tasks, photoUrls } = useQuest()
 
     const [formData, setFormData] = useState({
         participantName: '',
@@ -28,45 +31,58 @@ const CollageSection = () => {
         if (isSubmitting) return
         setIsSubmitting(true)
 
-        const canvas = await html2canvas(collageRef.current, {
-            scale: 3,
-            useCORS: true,
-        })
+        try {
+            const layout = computeLayout(tasks.length)
+            const items = tasks
+                .map((task, i) => ({
+                    image: photoUrls[task.id],
+                    span: layout[i],
+                }))
+                .filter(item => item.image)
 
-        const blob = await new Promise(resolve =>
-            canvas.toBlob(resolve, 'image/png')
-        )
-        const fileName = `${Date.now()}.png`
+            if (items.length === 0) {
+                alert('Сначала добавьте хотя бы одно фото')
+                return
+            }
 
-        const { error: uploadError } = await supabase.storage
-            .from('collage')
-            .upload(fileName, blob)
+            const blob = await renderCollageToCanvas(items)
+            const fileName = `${Date.now()}.png`
 
-        if (uploadError) {
-            throw uploadError 
-        }
+            const { error: uploadError } = await supabase.storage
+                .from('collage')
+                .upload(fileName, blob)
 
-        const { data } = supabase.storage
-            .from('collage')
-            .getPublicUrl(fileName)
+            if (uploadError) {
+                throw uploadError 
+            }
 
-        const { error } = await supabase
-            .from('collages')
-            .insert({
-                author_name: formData.participantName,
-                collage_title: formData.collageName,
-                image_url: data.publicUrl,
-            })
+            const { data } = supabase.storage
+                .from('collage')
+                .getPublicUrl(fileName)
 
-        if (error) {
-            throw error
+            const { error } = await supabase
+                .from('collages')
+                .insert({
+                    author_name: formData.participantName,
+                    collage_title: formData.collageName,
+                    image_url: data.publicUrl,
+                })
+
+            if (error) {
+                throw error
+            }
+        } catch (err) {
+            console.error(err)
+            alert('Не удалось отправить коллаж, попробуйте ещё раз')
+        } finally {
+            setIsSubmitting(false)
         }
     }
 
     return (
         <section id="collage" className={`${styles.collage} container`}>
             <h2 className={styles.collageTitle}>Твой коллаж</h2>
-            <CollageGrid ref={collageRef}/>
+            <CollageGrid ref={collageRef} isExporting={false} />
             <h3 className={styles.collageSubtitle}>Отправить коллаж</h3>
             <form className={styles.collageForm} onSubmit={handleSubmit}>
                 <div className={styles.collageField}>
@@ -104,6 +120,7 @@ const CollageSection = () => {
                 <button
                     className={styles.collageButton}
                     type="submit"
+                    disabled={isSubmitting}
                 >
                     {isSubmitting ? 'Отправка...' : 'Отправить'}
                 </button>

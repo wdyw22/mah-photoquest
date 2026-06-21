@@ -1,15 +1,17 @@
 import styles from './CollageCell.module.css';
-import { useQuest } from '@/context/QuestContext'
 
-
-const CollageCell = ({ cellNumber, taskId }) => {
-    const { photoUrls } = useQuest();
-    const image = photoUrls[taskId];
+const CollageCell = ({ cellNumber, image, hideWhenEmpty, isExporting, span }) => {
+    if (!image && hideWhenEmpty) {
+        return null
+    }
 
     return (
         <div
-            className={styles.collageCell}
-            style={image ? { backgroundImage: `url(${image})` } : {}}
+            className={`${styles.collageCell} ${isExporting ? styles.exporting : ''}`}
+            style={{
+                ...span,
+                ...(image ? { backgroundImage: `url(${image})` } : {}),
+            }}
         >
             {!image && (
                 <button type="button" className={styles.collageCellNumber}>

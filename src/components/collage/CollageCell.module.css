@@ -1,7 +1,7 @@
 .collageCell {
     background-color: #2B2B2B;
     width: 100%;
-    aspect-ratio: 98 / 104;
+    height: 100%;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -9,6 +9,12 @@
     align-items: center;
     justify-content: center;
     border: 1px dashed rgba(82, 79, 79, 1);
+    border-radius: 4px;
+}
+
+.collageCell.exporting {
+    border: none;
+    border-radius: 0;
 }
 
 .collageCellNumber {

@@ -13,7 +13,7 @@ const createImage = (url) =>
         image.src = url
     })
 
-async function getCroppedImg(imageSrc, cropAreaPixels, outputSize = 1080) {
+async function getCroppedImg(imageSrc, cropAreaPixels, outputSize = 1600) {
     const image = await createImage(imageSrc)
     const canvas = document.createElement('canvas')
     canvas.width = outputSize
