@@ -1,7 +1,8 @@
 'use client'
 
 import { supabase } from '@/lib/supabase'
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState, useMemo } from 'react'
+import { computeLayout } from '@/components/collage/layoutAlgorithm'
 
 const QuestContext = createContext()
 
@@ -23,8 +24,11 @@ export const QuestProvider = ({ children }) => {
         }
         setIsLoading(false)
     }
-    loadTasks()
-}, [])
+        loadTasks()
+    }, [])
+
+    const layout = useMemo(() => computeLayout(tasks.length), [tasks.length])
+
     const addPhotoUrl = (taskId, url) => {
         setPhotoUrls(prev => ({
             ...prev,
@@ -37,7 +41,7 @@ export const QuestProvider = ({ children }) => {
 
     
     return (
-        <QuestContext.Provider value={{ photoUrls, addPhotoUrl, completed, task: nextTask, tasks, isLoading }}>
+        <QuestContext.Provider value={{ photoUrls, addPhotoUrl, completed, task: nextTask, tasks, isLoading, layout }}>
             {children}
         </QuestContext.Provider>
      )

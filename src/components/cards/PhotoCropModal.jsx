@@ -13,11 +13,14 @@ const createImage = (url) =>
         image.src = url
     })
 
-async function getCroppedImg(imageSrc, cropAreaPixels, outputSize = 1600) {
+async function getCroppedImg(imageSrc, cropAreaPixels, aspect = 1) {
     const image = await createImage(imageSrc)
+    const outputWidth = 1600
+    const outputHeight = Math.round(outputWidth / aspect)
+    
     const canvas = document.createElement('canvas')
-    canvas.width = outputSize
-    canvas.height = outputSize
+    canvas.width = outputWidth
+    canvas.height = outputHeight
     const ctx = canvas.getContext('2d')
 
     ctx.drawImage(
@@ -28,18 +31,16 @@ async function getCroppedImg(imageSrc, cropAreaPixels, outputSize = 1600) {
         cropAreaPixels.height,
         0,
         0,
-        outputSize,
-        outputSize
+        outputWidth,
+        outputHeight
     )
 
     return new Promise((resolve) => {
-        canvas.toBlob((blob) => {
-            resolve(blob)
-        }, 'image/png')
+        canvas.toBlob((blob) => resolve(blob), 'image/png')
     })
 }
 
-const PhotoCropModal = ({ imageSrc, onConfirm, onCancel }) => {
+const PhotoCropModal = ({ imageSrc, onConfirm, onCancel, aspect = 1 }) => {
     const [crop, setCrop] = useState({ x: 0, y: 0 })
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
@@ -53,7 +54,7 @@ const PhotoCropModal = ({ imageSrc, onConfirm, onCancel }) => {
         if (!croppedAreaPixels) return
         setProcessing(true)
         try {
-            const blob = await getCroppedImg(imageSrc, croppedAreaPixels)
+            const blob = await getCroppedImg(imageSrc, croppedAreaPixels, aspect)
             onConfirm(blob)
         } finally {
             setProcessing(false)
@@ -68,12 +69,16 @@ const PhotoCropModal = ({ imageSrc, onConfirm, onCancel }) => {
                         image={imageSrc}
                         crop={crop}
                         zoom={zoom}
-                        aspect={1}
+                        aspect={aspect}
                         cropShape="rect"
                         showGrid={false}
                         onCropChange={setCrop}
                         onZoomChange={setZoom}
                         onCropComplete={onCropComplete}
+                        style={{
+                            containerStyle: { width: '100%', height: '300px' },
+                            cropAreaStyle: { border: '2px solid white' },
+                        }}
                     />
                 </div>
                 <div className={styles.controls}>

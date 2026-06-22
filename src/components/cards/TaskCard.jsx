@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useQuest } from '@/context/QuestContext'
 import PhotoCropModal from './PhotoCropModal'
 
-const TaskCard = ({ taskId, taskNumber, taskDescription, hint }) => {
+const TaskCard = ({ taskId, taskNumber, taskDescription, hint, cropAspect = 1 }) => {
     const fileInputRef = useRef(null)
 
     const [photoUrl, setPhotoUrl] = useState(null)
@@ -89,6 +89,7 @@ const TaskCard = ({ taskId, taskNumber, taskDescription, hint }) => {
             {rawImageSrc && (
                 <PhotoCropModal
                     imageSrc={rawImageSrc}
+                    aspect={cropAspect}
                     onConfirm={handleCropConfirm}
                     onCancel={handleCropCancel}
                 />

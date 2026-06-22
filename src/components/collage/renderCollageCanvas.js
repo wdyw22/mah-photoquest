@@ -1,5 +1,9 @@
 const COLS = 6
 const ROW_HEIGHT = 430
+const CELL_WIDTH = 600
+const GAP = 16
+const PADDING = 32
+const RADIUS = 16
 
 function loadImage(url) {
     return new Promise((resolve, reject) => {
@@ -18,6 +22,15 @@ function parseGridValue(value) {
     return { start, span }
 }
 
+function drawRoundedImage(ctx, img, sx, sy, sw, sh, x, y, w, h, r) {
+    ctx.save()
+    ctx.beginPath()
+    ctx.roundRect(x, y, w, h, r)
+    ctx.clip()
+    ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h)
+    ctx.restore()
+}
+
 export async function renderCollageToCanvas(items) {
     let maxRow = 0
     const parsedItems = items.map(item => {
@@ -27,16 +40,15 @@ export async function renderCollageToCanvas(items) {
         return { ...item, col, row }
     })
 
-    const cellWidth = 600
-    const canvasWidth = COLS * cellWidth
-    const canvasHeight = maxRow * ROW_HEIGHT
+    const canvasWidth = COLS * CELL_WIDTH + (COLS - 1) * GAP + PADDING * 2
+    const canvasHeight = maxRow * ROW_HEIGHT + (maxRow - 1) * GAP + PADDING * 2
 
     const canvas = document.createElement('canvas')
     canvas.width = canvasWidth
     canvas.height = canvasHeight
     const ctx = canvas.getContext('2d')
 
-    ctx.fillStyle = '#000000'
+    ctx.fillStyle = '#111111'
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 
     const images = await Promise.all(
@@ -45,10 +57,11 @@ export async function renderCollageToCanvas(items) {
 
     parsedItems.forEach((item, i) => {
         const img = images[i]
-        const x = (item.col.start - 1) * cellWidth
-        const y = (item.row.start - 1) * ROW_HEIGHT
-        const w = item.col.span * cellWidth
-        const h = item.row.span * ROW_HEIGHT
+
+        const x = PADDING + (item.col.start - 1) * (CELL_WIDTH + GAP)
+        const y = PADDING + (item.row.start - 1) * (ROW_HEIGHT + GAP)
+        const w = item.col.span * CELL_WIDTH + (item.col.span - 1) * GAP
+        const h = item.row.span * ROW_HEIGHT + (item.row.span - 1) * GAP
 
         const imgRatio = img.width / img.height
         const cellRatio = w / h
@@ -66,7 +79,7 @@ export async function renderCollageToCanvas(items) {
             sy = (img.height - sh) / 2
         }
 
-        ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h)
+        drawRoundedImage(ctx, img, sx, sy, sw, sh, x, y, w, h, RADIUS)
     })
 
     return new Promise((resolve) => {

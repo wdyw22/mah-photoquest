@@ -5,7 +5,7 @@ import styles from './TasksSection.module.css'
 
 
 const TaskSection = () => {
-    const { completed, task, tasks, isLoading } = useQuest()
+    const { completed, task, tasks, isLoading, layout } = useQuest()
     const total = tasks.length;
     const progress = total > 0 ? (completed / total) * 100 : 0;
 
@@ -37,15 +37,24 @@ const TaskSection = () => {
                     <span className={styles.taskTitle}>Задание {taskNumber}: {taskTitle}</span>
                 </div>
             </div>
-            {tasks.map((t) => (
-                <TaskCard 
-                    key={t.id} 
-                    taskId={t.id} 
-                    taskNumber={t.order_index} 
-                    taskDescription={t.description}
-                    hint={t.image_hint}
-                />
-            ))}
+            {tasks.map((t, i) => {
+                const span = layout[i]
+                const colSpan = parseInt(span?.gridColumn?.split('span')[1] || '1')
+                const rowSpan = parseInt(span?.gridRow?.split('span')[1] || '1')
+                const CELL_WIDTH = 600
+                const ROW_HEIGHT = 430
+                const aspect = (colSpan * CELL_WIDTH) / (rowSpan * ROW_HEIGHT)
+                return (
+                    <TaskCard 
+                        key={t.id} 
+                        taskId={t.id} 
+                        taskNumber={t.order_index} 
+                        taskDescription={t.description}
+                        hint={t.image_hint}
+                        cropAspect={aspect}
+                    />
+                )
+            })}
         </section>
     )
 }
