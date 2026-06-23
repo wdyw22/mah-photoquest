@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabase'
 import LoginForm from '@/components/admin/LoginForm'
 import CollageAdminList from '@/components/admin/CollageAdminList'
 import styles from './page.module.css'
+import AdminTask from '@/components/admin/AdminTask'
 
 export default function AdminPage() {
     const [session, setSession] = useState(undefined)
@@ -44,6 +45,7 @@ export default function AdminPage() {
                         </button>
                     </div>
                     <CollageAdminList />
+                    <AdminTask/>
                 </>
             )}
         </div>

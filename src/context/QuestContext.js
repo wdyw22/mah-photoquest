@@ -18,7 +18,6 @@ export const QuestProvider = ({ children }) => {
             .from('tasks')
             .select('*')
             .order('order_index')
-        console.log('tasks data:', data, 'error:', error)
         if (!error) {
             setTasks(data)
         }
