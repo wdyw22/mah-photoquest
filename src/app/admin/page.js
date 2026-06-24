@@ -8,15 +8,23 @@ import styles from './page.module.css'
 import AdminTask from '@/components/admin/AdminTask'
 
 export default function AdminPage() {
-    const [session, setSession] = useState(undefined)
+    const [session, setSession] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        supabase.auth.getSession().then(({ data }) => {
-            setSession(data.session)
-        })
+        // Сначала проверяем текущую сессию в хранилище
+        const initAuth = async () => {
+            const { data: { session: currentSession } } = await supabase.auth.getSession()
+            setSession(currentSession)
+            setLoading(false)
+        }
 
+        initAuth()
+
+        // Слушаем изменения
         const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
             setSession(newSession)
+            setLoading(false)
         })
 
         return () => {
@@ -28,8 +36,8 @@ export default function AdminPage() {
         await supabase.auth.signOut()
     }
 
-    if (session === undefined) {
-        return <div className={styles.loading}>Загрузка...</div>
+    if (loading) {
+        return <div className={styles.loading}>Загрузка сессии...</div>
     }
 
     return (
@@ -45,7 +53,7 @@ export default function AdminPage() {
                         </button>
                     </div>
                     <CollageAdminList />
-                    <AdminTask/>
+                    <AdminTask />
                 </>
             )}
         </div>

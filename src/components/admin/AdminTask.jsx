@@ -29,19 +29,21 @@ const AdminTask = () => {
     }
 
     const handleDelete = async (id) => {
-        if (!confirm('Удалить задание?')) return
-        const {data, error} = await supabase
-            .from('tasks')
-            .delete()
-            .eq('id', id)
-            console.log(data)
-        if (error) {
-            alert('Произошла ошибка, попробуйте снова!')
-            console.log(error)
-            return
-        }
+    if (!confirm('Удалить задание?')) return
 
+    const { error } = await supabase
+        .from('tasks')
+        .delete()
+        .eq('id', id)
+
+    if (error) {
+        alert('Произошла ошибка при удалении!')
+        console.error(error)
+        return
     }
+
+    window.location.reload()
+}
 
     const handleSubmit = async (e) => {
         e.preventDefault()
