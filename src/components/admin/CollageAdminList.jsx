@@ -65,6 +65,24 @@ const CollageAdminList = () => {
     if (collages.length === 0) {
         return <p className={styles.status}>Пока никто не отправил коллаж</p>
     }
+    const handleDownload = async (collage) => {
+        try {
+            const response = await fetch(collage.image_url)
+            const blob = await response.blob()
+            const blobUrl = URL.createObjectURL(blob)
+
+            const link = document.createElement('a')
+            link.href = blobUrl
+            link.download = `${collage.collage_title || 'collage'}.png`
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+            URL.revokeObjectURL(blobUrl)
+        } catch (err) {
+            console.error(err)
+            alert('Не удалось скачать файл')
+        }
+    }
 
     return (
         <div className={styles.grid}>
@@ -80,13 +98,12 @@ const CollageAdminList = () => {
                         <p className={styles.author}>{collage.author_name}</p>
                     </div>
                     <div className={styles.actions}>
-                        <a
-                        href={collage.image_url}
-                            download
+                        <button
                             className={styles.downloadButton}
+                            onClick={() => handleDownload(collage)}
                         >
                             Скачать
-                        </a>
+                        </button>
                         <button
                             className={styles.deleteButton}
                             onClick={() => handleDelete(collage.id)}

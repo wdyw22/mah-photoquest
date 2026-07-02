@@ -77,6 +77,7 @@ const CollageSection = () => {
         } finally {
             setIsSubmitting(false)
         }
+        window.location.reload()
     }
 
     return (
